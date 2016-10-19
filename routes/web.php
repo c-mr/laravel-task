@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+// 社員管理システム詳細画面
+Route::get('staff/{id}', 'StafflistController@show');
