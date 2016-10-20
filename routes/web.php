@@ -16,7 +16,8 @@ Route::get('/', function () {
 });
 // 社員管理システム詳細画面
 Route::get('staff', 'StafflistController@list');
-Route::get('staff/create', 'StafflistController@create');
+Route::get('staff/register', 'StafflistController@create');
 Route::get('staff/{id}', 'StafflistController@show');
-
 Route::post('staff', 'StafflistController@store');
+Route::get('staff/{id}/register', 'StafflistController@edit');
+Route::patch('staff/{id}', 'StafflistController@update');

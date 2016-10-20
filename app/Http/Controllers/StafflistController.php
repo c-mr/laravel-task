@@ -22,13 +22,24 @@ class StafflistController extends Controller
         $staff = Staff::findOrFail($id);
         return view("stafflist.show", compact("staff"));
     }
-    // 詳細新規編集
+    // 詳細新規
     public function create(){
-        return view("stafflist.create");
+        return view("stafflist.register");
     }
     // DBへの書き込み
-    public function store(StaffRequest $request) {  // ①
+    public function store(StaffRequest $request) {
         Staff::create($request->all());
         return redirect("staff");
+    }
+    // 詳細編集
+    public function edit($id){
+        $staff = Staff::findOrFail($id);
+        return view("stafflist.register", compact("staff"));
+    }
+    // DBへのアップデート
+    public function update($id, StaffRequest $request){
+        $staff = Staff::findOrFail($id);
+        $staff->update($request->all());
+        return redirect(url("staff", [$staff->id]));
     }
 }

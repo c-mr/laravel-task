@@ -16,6 +16,7 @@
         <tr>
             <th>性別</th><td>{{ Config::get('original.sex')[$staff->sex] }}</td>
         </tr>
+        <tr><td colspan="2">{!! link_to(action('StafflistController@edit', [$staff->id]), '編集', ['class' => 'btn btn-primary']) !!}</td></tr>
     </tbody>
 </table>
 @endsection

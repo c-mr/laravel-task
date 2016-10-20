@@ -4,7 +4,13 @@
 
 @include('errors.form_errors')
 
+
+@if (empty($staff->id))
 {!! Form::open(['url' => 'staff']) !!}
+@else
+{!! Form::model($staff, ['method' => 'PATCH', 'url' => ['staff', $staff->id]]) !!}
+@endif
+
 <table class="table">
     <caption>Staff create</caption>
     <tbody>
