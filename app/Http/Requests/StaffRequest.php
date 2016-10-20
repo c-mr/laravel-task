@@ -22,8 +22,8 @@ class StaffRequest extends FormRequest
      */
     public function rules(){
         return [
-            "staff_no" => "required|integer",
-            "name" => "required",
+            "staff_no" => "required|integer|unique:staff,staff_no",
+            "name" => "required|max:32",
             "busho" => "required",
             "sex" => "required",
         ];
