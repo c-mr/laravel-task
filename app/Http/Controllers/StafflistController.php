@@ -12,7 +12,10 @@ class StafflistController extends Controller
     public function list(){
         // $stafflist = Staff::all();
         $stafflist = Staff::orderBy('staff_no', 'desc')->get();
-        return view("stafflist.list", compact("stafflist"));
+
+        $busho = \Config::get('original.busho');
+        $sex = \Config::get('original.sex');
+        return view("stafflist.list", compact("stafflist", "busho", "sex"));
     }
     //詳細取得
     public function show($id){
@@ -24,8 +27,8 @@ class StafflistController extends Controller
         return view("stafflist.create");
     }
     // DBへの書き込み
-    public function store(StaffRequest $request){
-        Staff::create($request::all());
+    public function store(StaffRequest $request) {  // ①
+        Staff::create($request->all());
         return redirect("staff");
     }
 }

@@ -19,8 +19,8 @@
             <td><a href="{{ url('staff', $staff->id) }}">Detail</a></td>
             <td>{{ $staff->staff_no }}</td>
             <td>{{ $staff->name }}</td>
-            <td>{{ Config::get('original.busho')[$staff->busho] }}</td>
-            <td>{{ $staff->sex }}</td>
+            <td>{{ $busho[$staff->busho] }}</td>
+            <td>{{ $sex[$staff->sex] }}</td>
         </tr>
 @endforeach
     </tbody>

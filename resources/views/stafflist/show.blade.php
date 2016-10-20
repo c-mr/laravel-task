@@ -14,7 +14,7 @@
             <th>部署</th><td>{{ Config::get('original.busho')[$staff->busho] }}</td>
         </tr>
         <tr>
-            <th>性別</th><td>{{ $staff->sex }}</td>
+            <th>性別</th><td>{{ Config::get('original.sex')[$staff->sex] }}</td>
         </tr>
     </tbody>
 </table>
