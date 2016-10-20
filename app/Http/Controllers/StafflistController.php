@@ -27,10 +27,8 @@ class StafflistController extends Controller
         return view("stafflist.create");
     }
     // DBへの書き込み
-    public function store()
-    {
-        $inputs = \Request::all();
-        Staff::create($inputs);
+    public function store(StaffRequest $request){
+        Staff::create($request::all());
         return redirect("staff");
     }
 }
