@@ -26,8 +26,8 @@
         <tr>
             <th>{!! Form::label('sex','性別') !!}</th>
             <td>
-            <label class="checkbox-inline">{!! Form::checkbox('sex', 'man', null) !!} 男</label>
-            <label class="checkbox-inline">{!! Form::checkbox('sex', 'woman', null) !!} 女</label>
+            <label class="radio-inline">{!! Form::radio('sex', 'man', null) !!} 男</label>
+            <label class="radio-inline">{!! Form::radio('sex', 'woman', null) !!} 女</label>
             </td>
         </tr>
         <tr><td colspan="2">{!! Form::submit('Save', ['class' => 'btn btn-primary form-control']) !!}</td></tr>
