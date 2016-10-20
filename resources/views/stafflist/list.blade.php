@@ -1,6 +1,8 @@
 @extends('stafflist.layout')
 
 @section('content')
+
+<table class="table">
     <caption>Staff list</caption>
     <thead>
         <tr>
@@ -17,6 +19,7 @@
             <td><a href="{{ url('staff', $staff->id) }}">Detail</a></td>
             <td>{{ $staff->staff_no }}</td>
             <td>{{ $staff->name }}</td>
+            <td>{{ Config::get('original.busho')[$staff->busho] }}</td>
             <td>{{ $staff->sex }}</td>
         </tr>
 @endforeach

@@ -1,7 +1,7 @@
 @extends('stafflist.layout')
 
 @section('content')
-<table>
+<table class="table">
     <caption>Staff detail</caption>
     <tbody>
         <tr>
