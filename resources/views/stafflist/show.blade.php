@@ -11,7 +11,7 @@
             <th>名前</th><td>{{ $staff->name }}</td>
         </tr>
         <tr>
-            <th>部門</th><td>{{ Config::get('original.bumon')[$staff->busho] }}</td>
+            <th>部署</th><td>{{ Config::get('original.busho')[$staff->busho] }}</td>
         </tr>
         <tr>
             <th>性別</th><td>{{ $staff->sex }}</td>
