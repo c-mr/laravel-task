@@ -25,4 +25,5 @@
 @endforeach
     </tbody>
 </table>
+{!! link_to('staff/create', '新規作成', ['class' => 'btn btn-primary']) !!}
 @endsection
