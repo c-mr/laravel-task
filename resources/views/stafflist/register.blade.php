@@ -39,7 +39,7 @@
             <label class="radio-inline">{!! Form::radio('sex', '2', null) !!} 女</label>
             </td>
         </tr>
-        <tr><td colspan="2">{!! Form::submit('Save', ['class' => 'btn btn-primary form-control']) !!}</td></tr>
+        <tr><td colspan="2">{!! Form::submit('保存', ['class' => 'btn btn-primary form-control']) !!}</td></tr>
     </tbody>
 </table>
 {!! Form::close() !!}

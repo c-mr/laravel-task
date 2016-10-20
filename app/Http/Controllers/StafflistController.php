@@ -42,4 +42,10 @@ class StafflistController extends Controller
         $staff->update($request->all());
         return redirect(url("staff", [$staff->id]));
     }
+    // DBからの物理削除
+    public function destory($id){
+        $staff = Staff::findOrFail($id);
+        $staff->delete();
+        return redirect("staff");
+    }
 }
