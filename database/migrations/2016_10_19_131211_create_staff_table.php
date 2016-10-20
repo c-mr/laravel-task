@@ -13,11 +13,11 @@ class CreateStaffTable extends Migration
      */
     public function up(){
         Schema::create('staff', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('staff_no');
-            $table->text('name');
-            $table->integer('busho');
-            $table->integer('sex');
+            $table->increments('id')->comment('シリアルキー');
+            $table->integer('staff_no')->unsigned()->comment('社員番号');
+            $table->string('name', 32)->comment('名前：長さ32');
+            $table->integer('busho')->unsigned()->comment('部署');
+            $table->smallInteger('sex')->unsigned()->comment('性別');
             $table->timestamps();
         });
     }
