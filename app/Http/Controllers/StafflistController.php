@@ -9,11 +9,16 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+// モデル読込
 use App\Staff;
 
+// リクエスト読込
 use App\Http\Requests\StaffRequest;
 
+// DBクラスを使用する
 use DB;
+
+// Logクラスを使用する
 use Log;
 
 class StafflistController extends Controller
@@ -109,7 +114,7 @@ class StafflistController extends Controller
         return redirect(url("staff", [$staff->id]));
     }
 
-    // DBからの物理削除
+    // DBからの削除
     public function destory($id){
         // DBから指定のid行を取得
         $staff = Staff::findOrFail($id);
