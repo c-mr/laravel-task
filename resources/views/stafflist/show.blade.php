@@ -17,6 +17,8 @@
             <th>性別</th><td>{{ $sex[$staff->sex] }}</td>
         </tr>
         <tr><td colspan="2">
+        {!! link_to('staff', '戻る', ['class' => 'btn btn-primary']) !!}
+
         {!! link_to(action('StafflistController@edit', [$staff->id]), '編集', ['class' => 'btn btn-primary']) !!}
         </td></tr>
         <tr><td colspan="2">

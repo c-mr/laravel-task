@@ -30,5 +30,7 @@
 
     </tbody>
 </table>
-{!! link_to('staff/register', '新規作成', ['class' => 'btn btn-primary']) !!}
+
+{!! link_to('staff/create', '新規作成', ['class' => 'btn btn-primary']) !!}
+
 @endsection
