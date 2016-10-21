@@ -2,11 +2,15 @@
 
 @section('content')
 
+<!-- エラー出力の読み込み -->
 @include('errors.form_errors')
 
+<!-- idが送られて来ているかチェック -->
 @if (empty($staff->id))
+<!-- idが送られていなければ新規登録 -->
 {!! Form::open(['url' => 'staff']) !!}
 @else
+<!-- idが送られていれば編集画面表示 -->
 {!! Form::model($staff, ['method' => 'POST', 'url' => ['staff', $staff->id]]) !!}
 @endif
 

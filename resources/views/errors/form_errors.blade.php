@@ -1,3 +1,4 @@
+<!-- 入力チェックエラー結果画面表示 -->
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
