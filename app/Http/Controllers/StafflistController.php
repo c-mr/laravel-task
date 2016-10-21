@@ -61,7 +61,7 @@ class StafflistController extends Controller
 
         // トランザクションの開始
         DB::beginTransaction();
-        $e = "Staff　Table Insert error!";
+
         try {
             // StaffのDBにINSERTする。
             Staff::create($request->all());
