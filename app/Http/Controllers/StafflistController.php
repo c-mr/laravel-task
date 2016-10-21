@@ -11,37 +11,58 @@ class StafflistController extends Controller
     // 一覧取得
     public function list(){
         // $stafflist = Staff::all();
-        $stafflist = Staff::orderBy('staff_no', 'desc')->get();
+        $stafflist = Staff::orderBy('id', 'desc')->get();
 
-        $busho = \Config::get('original.busho');
-        $sex = \Config::get('original.sex');
-        return view("stafflist.list", compact("stafflist", "busho", "sex"));
+        $department = \Config::get('staff_master.department');
+        $sex = \Config::get('staff_master.sex');
+
+        return view("stafflist.list", compact("stafflist", "department", "sex"));
     }
+
     //詳細取得
     public function show($id){
         $staff = Staff::findOrFail($id);
-        return view("stafflist.show", compact("staff"));
+
+        $department = \Config::get('staff_master.department');
+        $sex = \Config::get('staff_master.sex');
+
+        return view("stafflist.show", compact("staff", "department", "sex"));
     }
-    // 詳細新規
+
+    // 新規登録
     public function create(){
-        return view("stafflist.register");
+        $department = \Config::get('staff_master.department');
+        $sex = \Config::get('staff_master.sex');
+
+        return view("stafflist.register", compact("department", "sex"));
     }
+
     // DBへの書き込み
     public function store(StaffRequest $request) {
         Staff::create($request->all());
+
         return redirect("staff");
     }
+
     // 詳細編集
     public function edit($id){
         $staff = Staff::findOrFail($id);
-        return view("stafflist.register", compact("staff"));
+
+        $department = \Config::get('staff_master.department');
+        $sex = \Config::get('staff_master.sex');
+
+        return view("stafflist.register", compact("staff", "department", "sex"));
     }
+
     // DBへのアップデート
     public function update($id, StaffRequest $request){
         $staff = Staff::findOrFail($id);
+
         $staff->update($request->all());
+
         return redirect(url("staff", [$staff->id]));
     }
+
     // DBからの物理削除
     public function destory($id){
         $staff = Staff::findOrFail($id);

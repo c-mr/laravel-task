@@ -23,8 +23,8 @@ class StaffRequest extends FormRequest
     public function rules(){
         return [
             "staff_no" => "required|integer|unique:staff,staff_no,".$this->id."'",
-            "name" => "required|max:32",
-            "busho" => "required",
+            "name" => "required|max:200",
+            "department" => "required",
             "sex" => "required",
         ];
     }

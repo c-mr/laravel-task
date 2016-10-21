@@ -27,16 +27,17 @@
             </td>
         </tr>
         <tr>
-            <th>{!! Form::label('busho','部署') !!}</th>
+            <th>{!! Form::label('department','部署') !!}</th>
             <td>
-            {!! Form::select('busho', Config::get('original.busho'), null, ['class' => 'form-control']) !!}
+            {!! Form::select('department', ['' => '選択してください']+$department, null, ['class' => 'form-control']) !!}
             </td>
         </tr>
         <tr>
             <th>{!! Form::label('sex','性別') !!}</th>
             <td>
-            <label class="radio-inline">{!! Form::radio('sex', '1', null) !!} 男</label>
-            <label class="radio-inline">{!! Form::radio('sex', '2', null) !!} 女</label>
+        @foreach($sex as $key => $value )
+            <label class="radio-inline">{!! Form::radio('sex', $key, null) !!} {{ $value }}</label>
+        @endforeach
             </td>
         </tr>
         <tr><td colspan="2">{!! Form::submit('保存', ['class' => 'btn btn-primary form-control']) !!}</td></tr>

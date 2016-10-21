@@ -11,10 +11,10 @@
             <th>名前</th><td>{{ $staff->name }}</td>
         </tr>
         <tr>
-            <th>部署</th><td>{{ Config::get('original.busho')[$staff->busho] }}</td>
+            <th>部署</th><td>{{ $department[$staff->department] }}</td>
         </tr>
         <tr>
-            <th>性別</th><td>{{ Config::get('original.sex')[$staff->sex] }}</td>
+            <th>性別</th><td>{{ $sex[$staff->sex] }}</td>
         </tr>
         <tr><td colspan="2">
         {!! link_to(action('StafflistController@edit', [$staff->id]), '編集', ['class' => 'btn btn-primary']) !!}
