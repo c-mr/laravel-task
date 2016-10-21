@@ -5,19 +5,22 @@
 <!-- エラー出力の読み込み -->
 @include('errors.form_errors')
 
-<!-- idが送られて来ているかチェック -->
-@if (empty($staff->id))
-<!-- idが送られていなければ新規登録 -->
-{!! Form::open(['url' => 'staff']) !!}
-@else
-<!-- idが送られていれば編集画面表示 -->
-{!! Form::model($staff, ['method' => 'POST', 'url' => ['staff', $staff->id]]) !!}
-@endif
 
 <table class="table">
     <caption>Staff create</caption>
+
+<!-- idが送られて来ているかチェック -->
+@if (empty($staff->id))
+<!-- idが送られていなければ新規登録 -->
+{!! Form::open(['url' => 'staff', 'name'=>'staff_form']) !!}
+@else
+<!-- idが送られていれば編集画面表示 -->
+{!! Form::model($staff, ['method' => 'POST', 'url' => ['staff', $staff->id], 'name'=>'staff_form']) !!}
+@endif
+
     <tbody>
         <tr>
+            <!--  -->
             <th>{!! Form::label('staff_no','社員番号') !!}</th>
             <td>
             {!! Form::text('staff_no', null, ['class' => 'form-control']) !!}
@@ -43,8 +46,10 @@
         @endforeach
             </td>
         </tr>
-        <tr><td colspan="2">{!! Form::submit('保存', ['class' => 'btn btn-primary form-control']) !!}</td></tr>
     </tbody>
-</table>
 {!! Form::close() !!}
+    <tfoot>
+        <tr><td colspan="2">{!! Form::button('保存', ['class' => 'btn btn-primary form-control', 'onclick'=>'document.forms[\'staff_form\'].submit();']) !!}</td></tr>
+    </tfoot>
+</table>
 @endsection
