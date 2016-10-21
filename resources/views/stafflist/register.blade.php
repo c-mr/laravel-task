@@ -49,7 +49,7 @@
     </tbody>
 {!! Form::close() !!}
     <tfoot>
-        <tr><td colspan="2">{!! Form::button('保存', ['class' => 'btn btn-primary form-control', 'onclick'=>'document.forms[\'staff_form\'].submit();']) !!}</td></tr>
+        <tr><td colspan="2">{!! Form::button('保存', ['class' => 'btn btn-primary form-control', 'onclick'=>'formsubmit();']) !!}</td></tr>
     </tfoot>
 </table>
 @endsection

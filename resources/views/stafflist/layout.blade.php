@@ -5,6 +5,8 @@
         <title>Staff</title>
         <!-- Bootstrap読み込み -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <!-- JavaScriptファイル読み込み -->
+        <script src="{{{asset('/js/staff-list.js')}}}" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
         <div class="container">
