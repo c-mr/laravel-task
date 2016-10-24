@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
 // 社員管理システム
 // 一覧リスト表示
 Route::get('staff', 'StafflistController@list');
