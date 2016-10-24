@@ -14,17 +14,9 @@
         <tr>
             <!-- 詳細画面へのリンク -->
             <td><a href="{{ url('staff', $staff->id) }}">Detail</a></td>
-
-            <!-- 社員番号出力 -->
             <td>{{ $staff->staff_no }}</td>
-
-            <!-- 名前出力 -->
             <td>{{ $staff->name }}</td>
-
-            <!-- 部署出力 -->
             <td>{{ $department[$staff->department] }}</td>
-
-            <!-- 性別 -->
             <td>{{ $sex[$staff->sex] }}</td>
         </tr>
 @endforeach

@@ -1,3 +1,5 @@
-function formsubmit(){
-    document.forms['staff_form'].submit();
-}
+$(function(){
+    $('#staff_formsubmit').click(function(){
+        $('form[name=staff_form]').submit();
+    });
+});
