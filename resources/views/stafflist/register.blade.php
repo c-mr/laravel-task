@@ -1,10 +1,14 @@
-@extends('stafflist.layout')
+@extends('layout')
 
 @section('content')
 
 <!-- エラー出力の読み込み -->
 @include('errors.form_errors')
 
+@push('sprict')
+<!-- JavaScriptファイル読み込み -->
+<script src="{{{asset('/js/staff-list.js')}}}" type="text/javascript" charset="utf-8"></script>
+@endpush
 
 <table class="table">
     <caption>Staff create</caption>

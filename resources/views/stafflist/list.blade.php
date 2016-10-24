@@ -1,4 +1,4 @@
-@extends('stafflist.layout')
+@extends('layout')
 
 @section('content')
 
