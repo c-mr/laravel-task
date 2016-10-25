@@ -23,7 +23,7 @@ class BodyweightsRequest extends FormRequest{
         return [
             // 同日、登録出来るのは1回のみ
             'measure_at' => 'required|date|unique:bodyweights',
-            'bodyweights' => 'required|numeric',
+            'bodyweight' => 'required|numeric',
         ];
     }
 }

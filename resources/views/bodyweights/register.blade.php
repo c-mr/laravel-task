@@ -26,15 +26,15 @@
               </div>
             </div>
 
-            <div class="form-group{{ $errors->has('bodyweights') ? ' has-error' : '' }}">
-              <label for="bodyweights" class="col-md-4 control-label">Current Weight</label>
+            <div class="form-group{{ $errors->has('bodyweight') ? ' has-error' : '' }}">
+              <label for="bodyweight" class="col-md-4 control-label">Current Weight</label>
 
               <div class="col-md-6">
-                <input id="bodyweights" type="text" class="form-control" name="bodyweights" value="{{ old('bodyweights') }}">
+                <input id="bodyweight" type="text" class="form-control" name="bodyweight" value="{{ old('bodyweight') }}">
 
-                @if ($errors->has('bodyweights'))
+                @if ($errors->has('bodyweight'))
                   <span class="help-block">
-                    <strong>{{ $errors->first('bodyweights') }}</strong>
+                    <strong>{{ $errors->first('bodyweight') }}</strong>
                   </span>
                 @endif
               </div>

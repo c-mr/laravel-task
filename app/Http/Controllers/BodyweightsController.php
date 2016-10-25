@@ -22,7 +22,7 @@ class BodyweightsController extends Controller
      */
     public function index(){
         //
-        return view("bodyweights.index");
+        return view('bodyweights.index');
     }
 
     /**
@@ -32,7 +32,7 @@ class BodyweightsController extends Controller
      */
     public function create(){
         // 新規登録・編集画面のViewテンプレートの指定
-        return view("bodyweights.register");
+        return view('bodyweights.register');
     }
 
     /**
@@ -47,7 +47,7 @@ class BodyweightsController extends Controller
         Bodyweights::create($request->all());
 
         // 戻りのページ
-        return('bodyweights');
+        return redirect('bodyweights');
     }
 
     /**
