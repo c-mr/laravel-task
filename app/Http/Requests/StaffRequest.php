@@ -1,7 +1,7 @@
 <?php
 /*
 FormRequestの作成
-php artisan make:request ArticleRequest
+php artisan make:request StaffRequest
 入力チェックのルールはここに記載
 エラー画面へのリダイレクトもここで行われる。
 */

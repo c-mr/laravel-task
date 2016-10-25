@@ -35,7 +35,7 @@ class AddStaffTable extends Migration
     public function down()
     {
         Schema::table('staff', function (Blueprint $table) {
-            $table->softDeletes('published_at');
+            $table->dropColumn('deleted_at');
         });
     }
 }

@@ -10,8 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /*
 * モデルの作成のコマンド
 php artisan make:model staff
-テーブルを操作をするための設定。
-事前に操作できる項目をここで宣言しておく
+
 */
 
 class Staff extends Model{
@@ -19,5 +18,6 @@ class Staff extends Model{
     use SoftDeletes;
     protected $dates = ['deleted_at'];
 
+    // 事前に操作できる項目をここで宣言しておく
     protected $fillable = ['staff_no', 'name', 'department', 'sex'];
 }
