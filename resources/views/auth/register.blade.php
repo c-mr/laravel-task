@@ -70,7 +70,7 @@
                             <label for="bodyweight" class="col-md-4 control-label">Current Weight</label>
 
                             <div class="col-md-6">
-                                <input id="bodyweight" type="bodyweight" class="form-control" name="bodyweight" value="{{ old('bodyweight') }}">
+                                <input id="bodyweight" type="text" class="form-control" name="bodyweight" value="{{ old('bodyweight') }}">
 
                                 @if ($errors->has('bodyweight'))
                                     <span class="help-block">
@@ -84,7 +84,7 @@
                             <label for="bodyheight" class="col-md-4 control-label">Current Height</label>
 
                             <div class="col-md-6">
-                                <input id="bodyheight" type="bodyheight" class="form-control" name="bodyheight" value="{{ old('bodyheight') }}">
+                                <input id="bodyheight" type="text" class="form-control" name="bodyheight" value="{{ old('bodyheight') }}">
 
                                 @if ($errors->has('bodyheight'))
                                     <span class="help-block">
