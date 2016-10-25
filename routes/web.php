@@ -11,11 +11,13 @@
 |
 */
 
+// TOP画面
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 
+// ユーザ登録・ログインログアウト等
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
@@ -23,6 +25,7 @@ Route::get('/home', 'HomeController@index');
 // 社員管理システム
 // 一覧リスト表示
 Route::get('staff', 'StafflistController@list');
+
 
 // 新規登録
 Route::get('staff/create', 'StafflistController@create');
