@@ -20,12 +20,21 @@ Route::get('/', function () {
 // ユーザ登録・ログインログアウト等
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+// 体重管理システム
+// 体重ヒストリー表示
+Route::get('bodyweights', 'bodyweightsController@index');
+
+// 新規登録
+Route::get('bodyweights/create', 'bodyweightsController@create');
+
+// 新規登録
+Route::post('bodyweights', 'bodyweightsController@store');
+
+
 
 // 社員管理システム
-// 一覧リスト表示
+// 一覧表示
 Route::get('staff', 'StafflistController@list');
-
 
 // 新規登録
 Route::get('staff/create', 'StafflistController@create');
