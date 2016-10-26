@@ -22,16 +22,16 @@ Auth::routes();
 
 // 体重管理システム
 // 体重ヒストリー表示
-Route::get('bodyweights', 'bodyweightsController@index');
+Route::get('bodyweights', 'BodyweightsController@index');
 
 // 新規登録保存
-Route::get('bodyweights/create', 'bodyweightsController@create');
+Route::get('bodyweights/create', 'BodyweightsController@create');
 
 // 新規登録DB
-Route::post('bodyweights', 'bodyweightsController@store');
+Route::post('bodyweights', 'BodyweightsController@store');
 
 // 詳細画面表示
-Route::get('bodyweights/{id}', 'bodyweightsController@show');
+Route::get('bodyweights/{id}', 'BodyweightsController@show');
 
 
 // 社員管理システム
