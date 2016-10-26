@@ -24,12 +24,14 @@ Auth::routes();
 // 体重ヒストリー表示
 Route::get('bodyweights', 'bodyweightsController@index');
 
-// 新規登録
+// 新規登録保存
 Route::get('bodyweights/create', 'bodyweightsController@create');
 
-// 新規登録
+// 新規登録DB
 Route::post('bodyweights', 'bodyweightsController@store');
 
+// 詳細画面表示
+Route::get('bodyweights/{id}', 'bodyweightsController@show');
 
 
 // 社員管理システム
@@ -42,7 +44,7 @@ Route::get('staff/create', 'StafflistController@create');
 // 詳細画面表示
 Route::get('staff/{id}', 'StafflistController@show');
 
-// 新規登録
+// 新規登録保存
 Route::post('staff', 'StafflistController@store');
 
 // 編集画面表示
