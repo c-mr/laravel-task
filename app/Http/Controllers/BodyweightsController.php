@@ -13,20 +13,26 @@ use App\Bodyweights;
 use App\Http\Requests\BodyweightsRequest;
 
 
-class BodyweightsController extends Controller
-{
+class BodyweightsController extends Controller{
     /**
-     * Display a listing of the resource.
+     * インデックスのリスト画面
      *
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        //
-        return view('bodyweights.index');
+        $user_id = \Auth::user()->id;
+
+        // 最新の記録が上に来るように測定日でソート
+        $bodyweights = Bodyweights::where('user_id', '=', $user_id)->orderBy('measure_at', 'desc')->paginate(10);
+
+        $test = 5;
+
+
+        return view('bodyweights.index', compact('bodyweights', 'test' ));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 新規作成
      *
      * @return \Illuminate\Http\Response
      */
@@ -51,14 +57,27 @@ class BodyweightsController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 詳細画面
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show($id){
+
+
+        $bodyweight = Bodyweights::findOrFail($id);
+
+        // 前回計測のデータを抽出する際に使用
+        $user_id = \Auth::user()->id;
+        $measure_at = Bodyweights::findOrFail($id)->measure_at;
+
+        /**
+        * SQL文例
+        * select * from bodyweights Where user_id = 5 AND measure_at < '2016-10-27' order by measure_at DESC limit 1
+        */
+        $bodyweight_prev = Bodyweights::where('user_id', '=', $user_id)->where('measure_at', '<', $measure_at)->orderBy('measure_at', 'desc')->limit('1')->first();
+
+        return view("bodyweights.show", compact('bodyweight', 'bodyweight_prev'));
     }
 
     /**
