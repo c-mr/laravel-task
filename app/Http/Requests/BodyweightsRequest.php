@@ -21,8 +21,9 @@ class BodyweightsRequest extends FormRequest{
      */
     public function rules(){
         return [
-            // 同日、登録出来るのは1回のみ
-            'measure_at' => 'required|date|unique:bodyweights',
+            'user_id' => 'required|numeric',
+            // 同日、登録出来るのは1回のみ但し、自分以外の登録は除外
+            'measure_at' => 'required|date|unique:bodyweights,measure_at',
             'bodyweight' => 'required|numeric',
         ];
     }
