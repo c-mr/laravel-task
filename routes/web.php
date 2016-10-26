@@ -33,6 +33,8 @@ Route::post('bodyweights', 'BodyweightsController@store');
 // 詳細画面表示
 Route::get('bodyweights/{id}', 'BodyweightsController@show');
 
+// 編集画面表示
+Route::get('bodyweights/{id}/edit', 'BodyweightsController@edit');
 
 // 社員管理システム
 // 一覧表示
