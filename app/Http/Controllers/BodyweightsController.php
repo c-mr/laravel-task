@@ -96,15 +96,19 @@ class BodyweightsController extends Controller{
     }
 
     /**
-     * DBに更新
+     * DBに更新する
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(BodyweightsRequest $request, $id)
-    {
-        //
+    public function update(BodyweightsRequest $request, $id){
+
+        $bodyweight = Bodyweights::findOrFail($id);
+
+        $bodyweight->update($request->all());
+
+        return redirect( url("bodyweights", $bodyweight->id) );
     }
 
     /**

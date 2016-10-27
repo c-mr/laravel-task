@@ -36,6 +36,10 @@ Route::get('bodyweights/{id}', 'BodyweightsController@detail');
 // 編集画面表示
 Route::get('bodyweights/{id}/edit', 'BodyweightsController@edit');
 
+// 登録編集更新
+Route::post('bodyweights/{id}', 'BodyweightsController@update');
+
+
 // 社員管理システム
 // 一覧表示
 Route::get('staff', 'StafflistController@list');
