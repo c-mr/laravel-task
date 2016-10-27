@@ -39,6 +39,10 @@ Route::get('bodyweights/{id}/edit', 'BodyweightsController@edit');
 // 登録編集更新
 Route::post('bodyweights/{id}', 'BodyweightsController@update');
 
+// 登録削除
+Route::delete('bodyweights/{id}', 'BodyweightsController@destroy');
+
+
 
 // 社員管理システム
 // 一覧表示

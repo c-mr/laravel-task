@@ -39,17 +39,17 @@
                             </tr>
                             <tr>
                                 <th>Difference.</th>
-                                <td>{!! $bodyweight_diff = $bodyweight->bodyweight - $bodyweight_prev->bodyweight !!}</td>
+                                <!-- 小数は2桁まで表示(計算結果で誤差ができるので) -->
+                                <td>{!! round($bodyweight->bodyweight - $bodyweight_prev->bodyweight ,2) !!}</td>
                             </tr>
                             <tr>
                                 @if ($bodyweight->bodyweight == $bodyweight_prev->bodyweight)
                                 <td colspan="2" class="info text-center">かわらん</td>
                                 @elseif($bodyweight->bodyweight > $bodyweight_prev->bodyweight)
                                 <td colspan="2" class="warning text-center">ふえた</td>
-                                @elseif($bodyweight->bodyweight
-                                < $bodyweight_prev->bodyweight)
-                                    <td colspan="2" class="success text-center">へった</td>
-                                    @endif
+                                @elseif($bodyweight->bodyweight < $bodyweight_prev->bodyweight)
+                                <td colspan="2" class="success text-center">へった</td>
+                                @endif
                             </tr>
                             @endif
                             <!-- 過去データが無ければ表示しない ここまで // -->
@@ -62,11 +62,9 @@
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <form method="POST" role="form" action="{{ url('/bodyweights/$bodyweight->id') }}" accept-charset="UTF-8">
-                                        <!-- フォームのトークン(これがないとSubmitできない) -->
-                                        {{ csrf_field() }}
-                                        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                                    </form>
+                                {!! Form::open(['method' => 'DELETE', 'url' => ['bodyweights', $bodyweight->id]]) !!}
+                                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                                {!! Form::close() !!}
                                 </td>
                             </tr>
                         </tbody>

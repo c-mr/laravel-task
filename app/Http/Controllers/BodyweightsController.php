@@ -117,8 +117,12 @@ class BodyweightsController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id){
+
+        $bodyweight = Bodyweights::findOrFail($id);
+
+        $bodyweight->delete();
+
+        return redirect("bodyweights");
     }
 }
