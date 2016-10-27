@@ -38,7 +38,7 @@ class BodyweightsController extends Controller{
      */
     public function create(){
         // 新規登録・編集画面のViewテンプレートの指定
-        return view('bodyweights.register');
+        return view('bodyweights.create');
     }
 
     /**
@@ -62,7 +62,7 @@ class BodyweightsController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id){
+    public function detail($id){
 
 
         $bodyweight = Bodyweights::findOrFail($id);
@@ -75,24 +75,30 @@ class BodyweightsController extends Controller{
         * SQL文例
         * select * from bodyweights Where user_id = 5 AND measure_at < '2016-10-27' order by measure_at DESC limit 1
         */
-        $bodyweight_prev = Bodyweights::where('user_id', '=', $user_id)->where('measure_at', '<', $measure_at)->orderBy('measure_at', 'desc')->limit('1')->first();
+        $bodyweight_prev = Bodyweights::where('user_id', '=', $user_id)
+                                        ->where('measure_at', '<', $measure_at)
+                                        ->orderBy('measure_at', 'desc')
+                                        ->limit('1')
+                                        ->first();
 
-        return view("bodyweights.show", compact('bodyweight', 'bodyweight_prev'));
+        return view("bodyweights.detail", compact('bodyweight', 'bodyweight_prev'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 詳細編集
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit($id){
+
+        $bodyweight = Bodyweights::findOrFail($id);
+
+        return view("bodyweights.edit", compact('bodyweight'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * DBに更新
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
