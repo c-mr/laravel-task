@@ -13,16 +13,16 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>&nbsp;</th><th>Measure date</th><th>Body Weight</th><th>Difference.</th>
+                            <th>Measure date</th><th>Body Weight</th><th>Difference.</th><th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
                     @foreach($bodyweights as $bodyweight)
                         <tr>
-                            <td><a href="{{ url('bodyweights', $bodyweight->id) }}">Detail</a></td>
                             <td>{!! date('Y/m/d', strtotime($bodyweight->measure_at)) !!}</td>
                             <td>{!! $bodyweight->bodyweight !!}kg</td>
                             <td>{!! $bodyweight->bodyweight - $test !!}</td>
+                            <td><a href="{{ url('bodyweights', $bodyweight->id) }}">Detail</a></td>
                         </tr>
                     @endforeach
                     </tbody>
