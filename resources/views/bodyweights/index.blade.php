@@ -22,7 +22,7 @@
                             <td><a href="{{ url('bodyweights', $bodyweight->id) }}">Detail</a></td>
                             <td>{!! date('Y/m/d', strtotime($bodyweight->measure_at)) !!}</td>
                             <td>{!! $bodyweight->bodyweight !!}kg</td>
-                            <td>{!! $bodyweight->bodyweight - 5 !!}</td>
+                            <td>{!! $bodyweight->bodyweight - $test !!}</td>
                         </tr>
                     @endforeach
                     </tbody>

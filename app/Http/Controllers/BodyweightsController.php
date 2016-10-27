@@ -25,6 +25,7 @@ class BodyweightsController extends Controller{
         // 最新の記録が上に来るように測定日でソート
         $bodyweights = Bodyweights::where('user_id', '=', $user_id)->orderBy('measure_at', 'desc')->paginate(10);
 
+        // test あとで消す
         $test = 5;
 
 
@@ -37,7 +38,7 @@ class BodyweightsController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function create(){
-        // 新規登録・編集画面のViewテンプレートの指定
+
         return view('bodyweights.create');
     }
 
@@ -49,10 +50,8 @@ class BodyweightsController extends Controller{
      */
     public function store(BodyweightsRequest $request){
 
-        // DB書き込み
         Bodyweights::create($request->all());
 
-        // 戻りのページ
         return redirect('bodyweights');
     }
 
@@ -63,7 +62,6 @@ class BodyweightsController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function detail($id){
-
 
         $bodyweight = Bodyweights::findOrFail($id);
 
@@ -85,7 +83,7 @@ class BodyweightsController extends Controller{
     }
 
     /**
-     * 詳細編集
+     * 詳細編集表示
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

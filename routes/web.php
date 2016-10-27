@@ -31,7 +31,7 @@ Route::get('bodyweights/create', 'BodyweightsController@create');
 Route::post('bodyweights', 'BodyweightsController@store');
 
 // 詳細画面表示
-Route::get('bodyweights/{id}', 'BodyweightsController@show');
+Route::get('bodyweights/{id}', 'BodyweightsController@detail');
 
 // 編集画面表示
 Route::get('bodyweights/{id}/edit', 'BodyweightsController@edit');
