@@ -23,7 +23,7 @@ class BodyweightsRequest extends FormRequest{
         return [
             'user_id' => 'required|numeric',
             // 同日、登録出来るのは1回のみ但し、自分以外の登録は除外
-            'measure_at' => 'required|date|unique:bodyweights,measure_at',
+            'measure_at' => 'required|date|unique:bodyweights,measure_at,'.$this->id,
             'bodyweight' => 'required|numeric',
         ];
     }
