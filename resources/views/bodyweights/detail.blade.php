@@ -39,7 +39,7 @@
                             </tr>
                             <tr>
                                 <th>Difference.</th>
-                                <td>{!! $bodyweight->bodyweight_diff <= 0 ? $bodyweight->bodyweight_diff : "+".$bodyweight->bodyweight_diff !!}</td>
+                                <td>{!! $bodyweight->bodyweight_diff <= 0 ? $bodyweight->bodyweight_diff."kg" : "+".$bodyweight->bodyweight_diff."kg" !!}</td>
                             </tr>
                             <tr>
                                 @if ($bodyweight->bodyweight_diff == 0)

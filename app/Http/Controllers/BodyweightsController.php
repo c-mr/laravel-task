@@ -75,6 +75,21 @@ class BodyweightsController extends Controller{
                        ->update(['bodyweight_diff' => round($bodyweight_diff ,2)]);
         }
 
+        // 次の測定データが有れば取得
+        $bodyweight_next = Bodyweights::where('user_id', '=', $user_id)
+                                        ->where('measure_at', '>', $bodyweights->measure_at)
+                                        ->orderBy('measure_at', 'asc')
+                                        ->limit('1')
+                                        ->first();
+
+        // 次の測定データがあれば再度比較の計算をし直して書き換える
+        if ( !empty($bodyweight_next) ) {
+
+            $bodyweight_diff = $bodyweight_next->bodyweight - $bodyweights->bodyweight;
+
+            Bodyweights::where('id', $bodyweight_next->id)
+                       ->update(['bodyweight_diff' => round($bodyweight_diff ,2)]);
+        }
 
         return redirect('bodyweights');
     }
@@ -89,7 +104,21 @@ class BodyweightsController extends Controller{
 
         $bodyweight = Bodyweights::findOrFail($id);
 
-        return view('bodyweights.detail', compact('bodyweight'));
+
+        // 前回計測のデータを抽出する際に使用
+        $user_id = \Auth::user()->id;
+        $measure_at = Bodyweights::findOrFail($id)->measure_at;
+        /**
+        * SQL文例
+        * select * from bodyweights Where user_id = 5 AND measure_at < '2016-10-27' order by measure_at DESC limit 1
+        */
+        $bodyweight_prev = Bodyweights::where('user_id', '=', $user_id)
+                                        ->where('measure_at', '<', $measure_at)
+                                        ->orderBy('measure_at', 'desc')
+                                        ->limit('1')
+                                        ->first();
+
+        return view("bodyweights.detail", compact('bodyweight', 'bodyweight_prev'));
     }
 
     /**
@@ -106,7 +135,7 @@ class BodyweightsController extends Controller{
     }
 
     /**
-     * DBに更新する
+     * DBをアップデートする
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -115,14 +144,31 @@ class BodyweightsController extends Controller{
     public function update(BodyweightsRequest $request, $id){
 
         $bodyweight = Bodyweights::findOrFail($id);
-
         $bodyweight->update($request->all());
+
+        $user_id = \Auth::user()->id;
+
+        // 次の測定データが有れば取得
+        $bodyweight_next = Bodyweights::where('user_id', '=', $user_id)
+                                        ->where('measure_at', '>', $bodyweight->measure_at)
+                                        ->orderBy('measure_at', 'asc')
+                                        ->limit('1')
+                                        ->first();
+
+        // 次の測定データがあれば再度比較の計算をし直して書き換える
+        if ( !empty($bodyweight_next) ) {
+
+            $bodyweight_diff = $bodyweight_next->bodyweight - $bodyweight->bodyweight;
+
+            Bodyweights::where('id', $bodyweight_next->id)
+                       ->update(['bodyweight_diff' => round($bodyweight_diff ,2)]);
+        }
 
         return redirect(url('bodyweights', $bodyweight->id));
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 削除(物理)
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
