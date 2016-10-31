@@ -55,13 +55,13 @@ class BodyweightsController extends Controller{
         $id = DB::getPdo()->lastInsertId();
 
         // 先程インサートされたデータを取得
-        $bodyweights = Bodyweights::findOrFail($id);
+        $bodyweight = Bodyweights::findOrFail($id);
 
         $user_id = \Auth::user()->id;
 
         // 前回の測定データが有れば取得
         $bodyweight_prev = Bodyweights::where('user_id', '=', $user_id)
-                                        ->where('measure_at', '<', $bodyweights->measure_at)
+                                        ->where('measure_at', '<', $bodyweight->measure_at)
                                         ->orderBy('measure_at', 'desc')
                                         ->limit('1')
                                         ->first();
@@ -69,7 +69,7 @@ class BodyweightsController extends Controller{
         // 前回の測定データがあれば比較の計算をして保存する
         if ( !empty($bodyweight_prev) ) {
 
-            $bodyweight_diff = $bodyweights->bodyweight - $bodyweight_prev->bodyweight;
+            $bodyweight_diff = $bodyweight->bodyweight - $bodyweight_prev->bodyweight;
 
             Bodyweights::where('id', $id)
                        ->update(['bodyweight_diff' => round($bodyweight_diff ,2)]);
@@ -77,15 +77,15 @@ class BodyweightsController extends Controller{
 
         // 次の測定データが有れば取得
         $bodyweight_next = Bodyweights::where('user_id', '=', $user_id)
-                                        ->where('measure_at', '>', $bodyweights->measure_at)
+                                        ->where('measure_at', '>', $bodyweight->measure_at)
                                         ->orderBy('measure_at', 'asc')
                                         ->limit('1')
                                         ->first();
 
-        // 次の測定データがあれば再度比較の計算をし直して書き換える
+        // 次の測定データがあれば再度、比較の計算をして上書き保存
         if ( !empty($bodyweight_next) ) {
 
-            $bodyweight_diff = $bodyweight_next->bodyweight - $bodyweights->bodyweight;
+            $bodyweight_diff = $bodyweight_next->bodyweight - $bodyweight->bodyweight;
 
             Bodyweights::where('id', $bodyweight_next->id)
                        ->update(['bodyweight_diff' => round($bodyweight_diff ,2)]);
@@ -148,6 +148,22 @@ class BodyweightsController extends Controller{
 
         $user_id = \Auth::user()->id;
 
+        // 前回の測定データが有れば取得
+        $bodyweight_prev = Bodyweights::where('user_id', '=', $user_id)
+                                        ->where('measure_at', '<', $bodyweight->measure_at)
+                                        ->orderBy('measure_at', 'desc')
+                                        ->limit('1')
+                                        ->first();
+
+        // 前回の測定データがあれば再度、比較の計算をして上書き保存
+        if ( !empty($bodyweight_prev) ) {
+
+            $bodyweight_diff = $bodyweight->bodyweight - $bodyweight_prev->bodyweight;
+
+            Bodyweights::where('id', $id)
+                       ->update(['bodyweight_diff' => round($bodyweight_diff ,2)]);
+        }
+
         // 次の測定データが有れば取得
         $bodyweight_next = Bodyweights::where('user_id', '=', $user_id)
                                         ->where('measure_at', '>', $bodyweight->measure_at)
@@ -155,13 +171,13 @@ class BodyweightsController extends Controller{
                                         ->limit('1')
                                         ->first();
 
-        // 次の測定データがあれば再度比較の計算をし直して書き換える
+        // 次の測定データがあれば再度、比較の計算をして上書き保存
         if ( !empty($bodyweight_next) ) {
 
             $bodyweight_diff = $bodyweight_next->bodyweight - $bodyweight->bodyweight;
 
             Bodyweights::where('id', $bodyweight_next->id)
-                       ->update(['bodyweight_diff' => round($bodyweight_diff ,2)]);
+                        ->update(['bodyweight_diff' => round($bodyweight_diff ,2)]);
         }
 
         return redirect(url('bodyweights', $bodyweight->id));
