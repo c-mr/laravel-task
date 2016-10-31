@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 class Bodyweights extends Model{
 
     // テーブル定義
-    protected $fillable = ['user_id', 'measure_at', 'bodyweight'];
+    protected $fillable = ['user_id', 'measure_at', 'bodyweight', 'bodyweight_diff'];
 
 
 }

@@ -12,6 +12,7 @@ use App\Bodyweights;
 // リクエスト読込
 use App\Http\Requests\BodyweightsRequest;
 
+use DB;
 
 class BodyweightsController extends Controller{
     /**
@@ -20,16 +21,14 @@ class BodyweightsController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function index(){
+
+        // 自身のユーザーIDを取得
         $user_id = \Auth::user()->id;
 
         // 最新の記録が上に来るように測定日でソート
         $bodyweights = Bodyweights::where('user_id', '=', $user_id)->orderBy('measure_at', 'desc')->paginate(10);
 
-        // test あとで消す
-        $test = 5;
-
-
-        return view('bodyweights.index', compact('bodyweights', 'test' ));
+        return view('bodyweights.index', compact('bodyweights' ));
     }
 
     /**
@@ -52,6 +51,31 @@ class BodyweightsController extends Controller{
 
         Bodyweights::create($request->all());
 
+        // 先程インサートされたシリアルID取得
+        $id = DB::getPdo()->lastInsertId();
+
+        // 先程インサートされたデータを取得
+        $bodyweights = Bodyweights::findOrFail($id);
+
+        $user_id = \Auth::user()->id;
+
+        // 前回の測定データが有れば取得
+        $bodyweight_prev = Bodyweights::where('user_id', '=', $user_id)
+                                        ->where('measure_at', '<', $bodyweights->measure_at)
+                                        ->orderBy('measure_at', 'desc')
+                                        ->limit('1')
+                                        ->first();
+
+        // 前回の測定データがあれば比較の計算をして保存する
+        if ( !empty($bodyweight_prev) ) {
+
+            $bodyweight_diff = $bodyweights->bodyweight - $bodyweight_prev->bodyweight;
+
+            Bodyweights::where('id', $id)
+                       ->update(['bodyweight_diff' => round($bodyweight_diff ,2)]);
+        }
+
+
         return redirect('bodyweights');
     }
 
@@ -65,21 +89,7 @@ class BodyweightsController extends Controller{
 
         $bodyweight = Bodyweights::findOrFail($id);
 
-        // 前回計測のデータを抽出する際に使用
-        $user_id = \Auth::user()->id;
-        $measure_at = Bodyweights::findOrFail($id)->measure_at;
-
-        /**
-        * SQL文例
-        * select * from bodyweights Where user_id = 5 AND measure_at < '2016-10-27' order by measure_at DESC limit 1
-        */
-        $bodyweight_prev = Bodyweights::where('user_id', '=', $user_id)
-                                        ->where('measure_at', '<', $measure_at)
-                                        ->orderBy('measure_at', 'desc')
-                                        ->limit('1')
-                                        ->first();
-
-        return view("bodyweights.detail", compact('bodyweight', 'bodyweight_prev'));
+        return view('bodyweights.detail', compact('bodyweight'));
     }
 
     /**
@@ -92,7 +102,7 @@ class BodyweightsController extends Controller{
 
         $bodyweight = Bodyweights::findOrFail($id);
 
-        return view("bodyweights.edit", compact('bodyweight'));
+        return view('bodyweights.edit', compact('bodyweight'));
     }
 
     /**
@@ -108,7 +118,7 @@ class BodyweightsController extends Controller{
 
         $bodyweight->update($request->all());
 
-        return redirect( url("bodyweights", $bodyweight->id) );
+        return redirect(url('bodyweights', $bodyweight->id));
     }
 
     /**
@@ -123,6 +133,6 @@ class BodyweightsController extends Controller{
 
         $bodyweight->delete();
 
-        return redirect("bodyweights");
+        return redirect('bodyweights');
     }
 }

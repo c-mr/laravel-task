@@ -21,7 +21,7 @@
                         <tr>
                             <td>{!! date('Y/m/d', strtotime($bodyweight->measure_at)) !!}</td>
                             <td>{!! $bodyweight->bodyweight !!}kg</td>
-                            <td>{!! $bodyweight->bodyweight - $test !!}</td>
+                            <td>{!! $bodyweight->bodyweight_diff <= 0 ? $bodyweight->bodyweight_diff : "+".$bodyweight->bodyweight_diff!!}</td>
                             <td><a href="{{ url('bodyweights', $bodyweight->id) }}">Detail</a></td>
                         </tr>
                     @endforeach

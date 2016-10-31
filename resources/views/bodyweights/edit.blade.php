@@ -12,6 +12,8 @@
 
                     <!-- フォーム部分の呼出 -->
                     {!! Form::model( $bodyweight, ['method' => 'POST', 'url' => ['bodyweights', $bodyweight->id], 'name'=>'bodyweight_form']) !!}
+                        <!-- 前回の保存されたデータが有れば呼出 -->
+                        {{Form::hidden('bodyweight_next', $bodyweight_next->bodyweight)}}
                         @include('bodyweights.form', ['measure_at' => date('Y/m/d', strtotime($bodyweight->measure_at)), 'submitButton' => 'Edit'])
                     {!! Form::close() !!}
 

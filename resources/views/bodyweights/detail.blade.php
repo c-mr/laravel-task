@@ -39,15 +39,14 @@
                             </tr>
                             <tr>
                                 <th>Difference.</th>
-                                <!-- 小数は2桁まで表示(計算結果で誤差ができるので) -->
-                                <td>{!! round($bodyweight->bodyweight - $bodyweight_prev->bodyweight ,2) !!}</td>
+                                <td>{!! $bodyweight->bodyweight_diff <= 0 ? $bodyweight->bodyweight_diff : "+".$bodyweight->bodyweight_diff !!}</td>
                             </tr>
                             <tr>
-                                @if ($bodyweight->bodyweight == $bodyweight_prev->bodyweight)
+                                @if ($bodyweight->bodyweight_diff == 0)
                                 <td colspan="2" class="info text-center">かわらん</td>
-                                @elseif($bodyweight->bodyweight > $bodyweight_prev->bodyweight)
+                                @elseif($bodyweight->bodyweight_diff > 0)
                                 <td colspan="2" class="warning text-center">ふえた</td>
-                                @elseif($bodyweight->bodyweight < $bodyweight_prev->bodyweight)
+                                @elseif($bodyweight->bodyweight_diff < 0)
                                 <td colspan="2" class="success text-center">へった</td>
                                 @endif
                             </tr>

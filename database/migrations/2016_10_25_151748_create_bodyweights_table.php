@@ -17,7 +17,8 @@ class CreateBodyweightsTable extends Migration
             // UsersテーブルのシリアルIDを保存。
             $table->integer('user_id')->unsigned()->comment('USERSのID');
             $table->foreign('user_id')->references('id')->on('users')->comment('USERSのIDの紐付け');
-            $table->float('bodyweight', 8, 2)->unsigned()->nullable()->comment('体重');
+            $table->float('bodyweight', 8, 2)->unsigned()->comment('体重');
+            $table->float('bodyweight_diff', 8, 2)->nullable()->comment('前回比');
             $table->date('measure_at')->nullable()->comment('計測日');
             $table->timestamps();
         });
