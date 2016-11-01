@@ -12,6 +12,8 @@ use App\Bodyweights;
 // リクエスト読込
 use App\Http\Requests\BodyweightsRequest;
 
+use App\Services\BodyweightsServices;
+
 use DB;
 use Log;
 
@@ -28,7 +30,9 @@ class BodyweightsController extends Controller{
         $user_id = \Auth::user()->id;
 
         // 最新の記録が上に来るように測定日でソート
-        $bodyweights = Bodyweights::where('user_id', '=', $user_id)->orderBy('measure_at', 'desc')->paginate(10);
+        $bodyweights = Bodyweights::where('user_id', '=', $user_id)
+                                    ->orderBy('measure_at', 'desc')
+                                    ->paginate(10);
 
         return view('bodyweights.index', compact('bodyweights' ));
     }
@@ -58,7 +62,7 @@ class BodyweightsController extends Controller{
             $bodyweight = Bodyweights::create($request->all());
 
             // 前日比の計算書き込み関数の呼出
-            Bodyweights::diff($bodyweight->id, $bodyweight);
+            BodyweightsServices::diff($bodyweight->id, $bodyweight);
 
             // トランザクション終了
             DB::commit();
@@ -89,6 +93,7 @@ class BodyweightsController extends Controller{
         // 前回計測のデータを抽出する際に使用
         $user_id = \Auth::user()->id;
         $measure_at = Bodyweights::findOrFail($id)->measure_at;
+
         /**
         * SQL文例
         * select * from bodyweights Where user_id = 5 AND measure_at < '2016-10-27' order by measure_at DESC limit 1
@@ -119,7 +124,7 @@ class BodyweightsController extends Controller{
      * DBをアップデートする
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(BodyweightsRequest $request, $id){
@@ -133,7 +138,7 @@ class BodyweightsController extends Controller{
             $bodyweight->update($request->all());
 
             // 前日比の計算書き込み関数の呼出
-            Bodyweights::diff($id, $bodyweight);
+            BodyweightsServices::diff($id, $bodyweight);
 
             // トランザクション終了
             DB::commit();
