@@ -102,7 +102,6 @@ class BodyweightsController extends Controller{
         $bodyweight_prev = Bodyweights::where('user_id', '=', $user_id)
                                         ->where('measure_at', '<', $measure_at)
                                         ->orderBy('measure_at', 'desc')
-                                        ->limit('1')
                                         ->first();
 
         return view("bodyweights.detail", compact('bodyweight', 'bodyweight_prev'));

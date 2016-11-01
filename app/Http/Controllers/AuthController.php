@@ -91,19 +91,18 @@ class AuthController extends Controller{
 
         $user = User::findOrFail($id);
 
+
+            Log::error($request);
+
         // トランザクションの開始
         DB::beginTransaction();
 
         try {
 
-            User::where('id', $id)
-                ->update([
-                'name' => $request['name'],
-                'email' => $request['email'],
-                'password' => bcrypt($request['password']),
-                'bodyheight' => $request['bodyheight'],
-                'bodyweight' => $request['bodyweight'],
-            ]);
+            // パスワードを暗号化する
+            $request['password'] = bcrypt($request['password']);
+
+            $user->update($request->all());
 
             // トランザクション終了
             DB::commit();
@@ -127,9 +126,25 @@ class AuthController extends Controller{
 
         $user = User::findOrFail($id);
 
-        $user->delete();
+        // トランザクションの開始
+        DB::beginTransaction();
 
-        \Auth::logout();
-        return view('index');
+        try {
+
+            $user->delete();
+
+            \Auth::logout();
+
+            // トランザクション終了
+            DB::commit();
+        } catch (Exception $e) {
+            // ログにエラー出力
+            Log::error($e);
+
+            // DBをロールバックする
+            DB::rollback();
+        }
+        // リダイレクトをリターンする
+        return \Redirect::to('/');
     }
 }
