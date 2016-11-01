@@ -59,7 +59,10 @@
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="{{ url('/bodyweights') }}">bodyweights List</a>
+                                        <a href="{{ url('/bodyweights') }}">Bodyweights List</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('/user/'.Auth::user()->id.'/edit') }}">Edit user info</a>
                                     </li>
                                     <li>
                                         <a href="{{ url('/logout') }}"

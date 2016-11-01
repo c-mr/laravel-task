@@ -12,6 +12,7 @@ use App\Bodyweights;
 // リクエスト読込
 use App\Http\Requests\BodyweightsRequest;
 
+// サービス読込(関数など)
 use App\Services\BodyweightsServices;
 
 use DB;

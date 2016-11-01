@@ -20,6 +20,18 @@ Route::get('/', function () {
 // ユーザ登録・ログインログアウト等
 Auth::routes();
 
+// ユーザ情報編集
+// 編集画面表示
+Route::get('user/{id}/edit', 'AuthController@edit');
+
+// 登録編集更新
+Route::post('user/{id}', 'AuthController@update');
+
+// 登録削除
+Route::delete('user/{id}', 'AuthController@destroy');
+
+
+
 // 体重管理システム
 // 体重ヒストリー表示
 Route::get('bodyweights', 'BodyweightsController@index');
